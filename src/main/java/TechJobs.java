@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+// import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -59,7 +59,7 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
-                String searchTerm = in.nextLine().toLowerCase();
+                String searchTerm = in.nextLine();
                 ArrayList<HashMap<String, String>> searchResults = JobData.findByValue(searchTerm);
 
                 if (searchField.equals("all")) {
@@ -75,7 +75,7 @@ public class TechJobs {
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
 
         int choiceIdx = -1;
-        Boolean validChoice = false;
+        boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
         // Put the choices in an ordered structure so we can
@@ -98,7 +98,7 @@ public class TechJobs {
             if (in.hasNextInt()) {
                 choiceIdx = in.nextInt();
                 in.nextLine();
-            } else {
+            } else if (in.hasNextLine()){
                 String line = in.nextLine();
                 boolean shouldQuit = line.equals("x");
                 if (shouldQuit) {
@@ -121,17 +121,15 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
         if (someJobs.isEmpty()) {
-            System.out.println("No Results");
+            System.out.print("No Results");
         } else {
             for (HashMap<String, String> job : someJobs) {
                 System.out.println("*****");
-                System.out.println("position type: " + job.get("position type"));
-                System.out.println("name: " + job.get("name"));
-                System.out.println("employer: " + job.get("employer"));
-                System.out.println("location: " + job.get("location"));
-                System.out.println("core competency: " + job.get("core competency"));
+                for (String key : job.keySet()) {
+                    System.out.println(key + ": " + job.get(key));
+                }
                 System.out.println("*****");
-                System.out.println(); // Add a blank line to separate job listings
+                System.out.println();
             }
         }
     }
