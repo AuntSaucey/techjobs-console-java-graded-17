@@ -101,7 +101,7 @@ public class JobData {
         for (HashMap<String, String> job : allJobs) {
             for (String column : job.keySet()) {
                 String columnValue = job.get(column);
-                if (columnValue != null && columnValue.toLowerCase().contains(lowerCaseValue)) {
+                if (columnValue != null && columnValue.toLowerCase().contains(value.toLowerCase())) {
                     results.add(job);
                     break;
                 }
